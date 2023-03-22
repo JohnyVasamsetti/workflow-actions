@@ -1,28 +1,13 @@
 name: deployment
 
 on:
-  workflow_dispatch:
-    inputs:
-      environment:
-        description: 'Environment'
-        required: true
-        type: choice
-        options:
-          - devl
-          - qual
-          - cert
-          - prod
-      image-tag:
-        description: 'Image tag'
-        required: true
-        type: string
-
   workflow_run:
     workflows:
       - build
     types:
       - completed
-    branches: platform
+    branches:
+      - platform
 
 
 jobs:
