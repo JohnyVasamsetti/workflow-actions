@@ -1,0 +1,24 @@
+name: deployment
+
+on:
+  workflow_run:
+    workflows:
+      - build
+    types:
+      - completed
+    branches:
+      - platform
+
+
+jobs:
+  temp:
+    if: always()
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ github.event.workflow_run.head_branch }}  ${{github.event.workflow_run.conclusion}}"
+  temp2:
+    if: success() || failure()
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "${{ github.event.workflow_run.head_branch }}  ${{github.event.workflow_run.conclusion}}"
+
