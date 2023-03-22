@@ -8,7 +8,7 @@ on:
         required: true
   push:
     branches:
-      - "platform"
+      - "master"
       - "r[0-9][0-9].[0-9][0-9]"
     paths-ignore:
       - ".github/**/*.yml"
@@ -19,7 +19,7 @@ on:
       - ".gitignore"
   pull_request:
     branches:
-      - "platform"
+      - "master"
       - "r[0-9][0-9].[0-9][0-9]"
     paths-ignore:
       - ".github/**/*.yml"
