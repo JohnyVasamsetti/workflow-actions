@@ -15,7 +15,7 @@ jobs:
     if: always()
     runs-on: ubuntu-latest
     steps:
-      - run: echo "${{ github.event.workflow_run.head_branch }}  ${{github.event.workflow_run.conclusion}}"
+      - run: echo "${{ github.event.workflow_run }}  ${{github.event.workflow_run.conclusion}}"
   temp2:
     if: success() || failure()
     runs-on: ubuntu-latest
