@@ -22,7 +22,7 @@ on:
       - build
     types:
       - completed
-    branches: [ platform ]
+    branches: platform
 
 
 jobs:
