@@ -3,26 +3,31 @@ name: deployment
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'Environment'
+      message:
+        description: 'Reason for manually triggering the build'
         required: true
-        type: choice
-        options:
-          - devl
-          - qual
-          - cert
-          - prod
-      image-tag:
-        description: 'Image tag'
-        required: true
-        type: string
-
-  workflow_run:
-    workflows:
-      - build
-    types:
-      - completed
-    branches: [ platform ]
+  push:
+    branches:
+      - "platform"
+      - "r[0-9][0-9].[0-9][0-9]"
+    paths-ignore:
+      - ".github/**/*.yml"
+      - ".github/**/*.yaml"
+      - "!.github/workflows/gradle-build.yaml"
+      - "infra/**"
+      - "**/*.md"
+      - ".gitignore"
+  pull_request:
+    branches:
+      - "platform"
+      - "r[0-9][0-9].[0-9][0-9]"
+    paths-ignore:
+      - ".github/**/*.yml"
+      - ".github/**/*.yaml"
+      - "!.github/workflows/gradle-build.yaml"
+      - "infra/**"
+      - "**/*.md"
+      - ".gitignore"
 
 jobs:
   temp:
