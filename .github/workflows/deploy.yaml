@@ -29,6 +29,9 @@ on:
       - "**/*.md"
       - ".gitignore"
 
+concurrency: build_${{ github.ref }}
+
+
 jobs:
   temp:
     if: success() || failure()
