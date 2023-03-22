@@ -3,19 +3,9 @@ name: deployment
 on:
   workflow_dispatch:
     inputs:
-      environment:
-        description: 'Environment'
+      message:
+        description: 'Reason for manually triggering the build'
         required: true
-        type: choice
-        options:
-          - devl
-          - qual
-          - cert
-          - prod
-      image-tag:
-        description: 'Image tag'
-        required: true
-        type: string
 
   workflow_run:
     workflows:
