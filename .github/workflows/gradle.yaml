@@ -1,0 +1,51 @@
+name: build
+
+on:
+  workflow_dispatch:
+    inputs:
+      message:
+        description: 'Reason for manually triggering the build'
+        required: true
+  push:
+    branches:
+      - "platform"
+      - "r[0-9][0-9].[0-9][0-9]"
+    paths-ignore:
+      - ".github/**/*.yml"
+      - ".github/**/*.yaml"
+      - "!.github/workflows/gradle-build.yaml"
+      - "infra/**"
+      - "**/*.md"
+      - ".gitignore"
+  pull_request:
+    branches:
+      - "platform"
+      - "r[0-9][0-9].[0-9][0-9]"
+    paths-ignore:
+      - ".github/**/*.yml"
+      - ".github/**/*.yaml"
+      - "!.github/workflows/gradle-build.yaml"
+      - "infra/**"
+      - "**/*.md"
+      - ".gitignore"
+
+concurrency: build_${{ github.ref }}
+
+jobs:
+  build-run-tests:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "First Job"
+
+  push-image:
+    needs: build-run-tests
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Second Job"
+
+  send-notification:
+    needs: push-image
+    if: failure()
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Second Job"
